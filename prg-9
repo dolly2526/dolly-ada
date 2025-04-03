@@ -1,0 +1,12 @@
+import random
+
+def monte_carlo_pi(n=1_000_000):
+    count = sum((random.uniform(-1, 1) ** 2 + random.uniform(-1, 1) ** 2) <= 1 for _ in range(n))
+    return 4 * count / n
+
+def las_vegas_find_min(arr):
+    return min(arr) if arr else None
+
+arr = [42, 5, 12, 89, 3, 7, 18, 3]
+print(f"Estimated pi value using monte_carlo: {monte_carlo_pi()}")
+print(f"Minimum value found using las_vegas: {las_vegas_find_min(arr)}")
