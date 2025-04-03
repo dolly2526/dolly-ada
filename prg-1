@@ -1,0 +1,35 @@
+import time
+import random
+import math
+def linear_function(n):
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+def quadratic_function(n):
+    total = 0
+    for i in range(n):
+        for j in range(n):
+            total += i * j
+    return total
+def logarithmic_function(n):
+    count = 0
+    while n > 1:
+        n //= 2
+        count += 1
+    return count
+def time_function(func, n):
+    start_time = time.time()
+    func(n)
+    end_time = time.time()
+    return end_time - start_time
+def analyze_performance():
+    sizes = [10, 100, 1000, 5000, 10000]
+    print(f"{'Size':<10}{'Linear (O(n))':<20}{'Quadratic (O(n^2))':<25}{'Logarithmic (O(log n))':<30}")
+    
+    for size in sizes:
+        linear_time = time_function(linear_function, size)
+        quadratic_time = time_function(quadratic_function, size)
+        logarithmic_time = time_function(logarithmic_function, size)
+        
+        print(f"{size:<10}{linear_time:<20}{quadratic_time:<25}{logarithmic_time:<30}")
