@@ -1,0 +1,40 @@
+import math
+
+class SolveRecurrence:
+    @staticmethod
+    def main():
+        print("T(n) = 2T(n/2) + n\n")
+        SolveRecurrence.substitution()
+        print("\n")
+        SolveRecurrence.tree()
+        print("\n")
+        SolveRecurrence.master()
+
+    @staticmethod
+    def substitution():
+        print("Substitution:")
+        print("1. Assume: T(n) = cn log n")
+        print("2. Substitute: T(n) = 2[c(n/2) log(n/2)] + n")
+        print("   T(n) = cn log n - cn + n")
+        print("   T(n) ≈ cn log n")
+        print("Result: O(n log n)")
+
+    @staticmethod
+    def tree():
+        print("Recurrence Tree:")
+        print("1. Levels: n, 2(n/2), 4(n/4), ...")
+        print("2. Level work: n")
+        print("   Levels: log(n)")
+        print("3. Total: n log n")
+        print("Result: O(n log n)")
+
+    @staticmethod
+    def master():
+        print("Master Method:")
+        print("1. T(n) = aT(n/b) + f(n)")
+        print("   a=2, b=2, f(n)=n")
+        print("2. log_b(a) = 1")
+        print("3. a = b^1, Case 2")
+        print("4. Result: O(n log n)")
+
+SolveRecurrence.main()
