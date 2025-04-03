@@ -1,0 +1,33 @@
+class Match:
+    def _init_(self, graph):
+        self.g = graph
+        self.p = len(graph)
+        self.j = len(graph[0])
+
+    def bpm(self, u, m, s):
+        for v in range(self.j):
+            if self.g[u][v] and not s[v]:
+                s[v] = True
+                if m[v] == -1 or self.bpm(m[v], m, s):
+                    m[v] = u
+                    return True
+        return False
+
+    def max_match(self):
+        m = [-1] * self.j
+        res = 0
+        for i in range(self.p):
+            s = [False] * self.j
+            if self.bpm(i, m, s):
+                res += 1
+        return res
+
+graph = [[0, 1, 1, 0, 0, 0],
+         [1, 0, 0, 1, 0, 0],
+         [0, 0, 1, 0, 0, 0],
+         [0, 0, 1, 1, 0, 0],
+         [0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 1]]
+
+matcher = Match(graph)
+print(f"Max applicants with jobs: {matcher.max_match()}")
