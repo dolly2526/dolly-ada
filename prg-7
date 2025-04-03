@@ -1,0 +1,26 @@
+def naive_search(text, pattern):
+    for i in range(len(text) - len(pattern) + 1):
+        if text[i:i+len(pattern)] == pattern:
+            print(f"Pattern found at index {i}")
+
+def rabin_karp_search(text, pattern, d=256, q=101):
+    p = t = 0
+    h = pow(d, len(pattern) - 1, q)
+    
+    for i in range(len(pattern)):
+        p = (d * p + ord(pattern[i])) % q
+        t = (d * t + ord(text[i])) % q
+    
+    for i in range(len(text) - len(pattern) + 1):
+        if p == t and text[i:i+len(pattern)] == pattern:
+            print(f"Pattern found at index {i}")
+        if i < len(text) - len(pattern):
+            t = (d * (t - ord(text[i]) * h) + ord(text[i + len(pattern)])) % q
+            if t < 0:
+                t += q
+
+text, pattern = "ABABDABACDABABCABAB", "ABABCABAB"
+print("Naïve String Matching:")
+naive_search(text, pattern)
+print("\nRabin-Karp Algorithm:")
+rabin_karp_search(text, pattern)
